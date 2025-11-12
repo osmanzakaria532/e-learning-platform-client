@@ -1,30 +1,62 @@
+import { useContext } from 'react';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
+import { toast } from 'react-toastify';
+import userImg from '../../src/assets/icons8-avatar.gif';
+import { AuthContext } from '../ContextApi/AuthContext';
+import auth from '../firebase/firebase.config';
 import Container from './shered_ui/Container';
 
 const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
+
+  console.log(user);
+
   const links = (
     <>
       <li>
-        <Link>Dashboard</Link>
+        <NavLink to="/" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link>All Courses</Link>
+        <NavLink to="/all-courses" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
+          All Courses
+        </NavLink>
       </li>
       <li>
-        <Link>Achievements</Link>
+        <NavLink to="/achievements" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
+          Achievements
+        </NavLink>
       </li>
       <li>
-        <Link>Community</Link>
+        <NavLink to="/community" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
+          Community
+        </NavLink>
       </li>
       <li>
-        <Link>Blogs</Link>
+        <NavLink to="/blogs" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
+          Blogs
+        </NavLink>
       </li>
       <li>
-        <Link>Contact</Link>
+        <NavLink to="/contact" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
+          Contact
+        </NavLink>
       </li>
     </>
   );
+
+  const handleSignOut = () => {
+    console.log('Sign Out btm clicked');
+    signOutUser(auth)
+      .then(() => {
+        toast.success('Sign-out successfully');
+      })
+      .catch((err) => {
+        console.log('log out err', err);
+      });
+  };
   return (
     <>
       <div className=" bg-base-100 shadow-sm">
@@ -61,17 +93,28 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              {links}
-              {/* <li>
-                <a>Item 1</a>
-              </li> */}
-            </ul>
+            <ul className="menu menu-horizontal px-1 menu-item space-x-1.5">{links}</ul>
           </div>
           <div className="navbar-end">
-            <Link to="signin" className="btn">
-              Log in <FaArrowRightToBracket />
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-1.5 relative group">
+                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/my-account">
+                  <div className="w-8 h-8">
+                    <img src={userImg} alt="" />
+                  </div>
+                </Link>
+                <div className="absolute -bottom-10 right-0 z-50 hidden group-hover:block">
+                  <button onClick={handleSignOut} className=" btn flex items-center">
+                    Sign out <FaArrowRightToBracket />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Link to="signin" className="btn">
+                Sign in <FaArrowRightToBracket />
+              </Link>
+            )}
           </div>
         </Container>
       </div>

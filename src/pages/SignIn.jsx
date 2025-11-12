@@ -23,6 +23,7 @@ const SignIn = () => {
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.code);
       });
   };
   return (

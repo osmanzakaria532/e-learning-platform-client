@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import { motion } from 'framer-motion';
 import { PlusCircle } from 'lucide-react';
 
 import instructor from '../../src/assets/become-instructor.jpg';
@@ -36,7 +38,7 @@ const Partner = () => {
           </svg>
 
           {/* Content */}
-          <motion
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -60,7 +62,7 @@ const Partner = () => {
                 Apply Now
               </button>
             </div>
-          </motion>
+          </motion.div>
         </div>
 
         {/* RIGHT: Image panel */}
