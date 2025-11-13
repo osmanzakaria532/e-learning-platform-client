@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router';
+import LoadingSpinner from '../components/LoadingSpinner';
 import Achievements from '../Pages/Achievements';
 import AllCourses from '../Pages/AllCourses';
 import Blogs from '../Pages/Blogs';
@@ -9,7 +10,6 @@ import SignIn from '../Pages/SignIn';
 import SignUp from '../Pages/SignUp';
 import PrivateRouter from '../Provider/PrivateRouter';
 import RootLayout from '../RootLayout/RootLayout';
-import LoadingSpinner from '../components/LoadingSpinner';
 
 const router = createBrowserRouter([
   {

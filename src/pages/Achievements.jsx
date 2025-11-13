@@ -5,7 +5,7 @@ const Achievements = () => {
   return (
     <div className="py-10">
       <Container>
-        <h2>achievements</h2>
+        <h2>Achievements</h2>
       </Container>
     </div>
   );
