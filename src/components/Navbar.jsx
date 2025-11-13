@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import userImg from '../../src/assets/icons8-avatar.gif';
 import { AuthContext } from '../ContextApi/AuthContext';
 import auth from '../firebase/firebase.config';
-import Container from './shered_ui/Container';
+import Container from './shared_ui/Container';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);

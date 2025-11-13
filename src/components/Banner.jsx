@@ -1,6 +1,6 @@
 import { IoSearchOutline } from 'react-icons/io5';
 import bannerImg from '../../src/assets/banner-img.png';
-import Container from './shered_ui/Container';
+import Container from './shared_ui/Container';
 
 const Banner = () => {
   return (
