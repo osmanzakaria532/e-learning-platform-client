@@ -7,7 +7,7 @@ const Banner = () => {
     <div>
       <div className="mt-10">
         <Container className="flex items-center">
-          <div className="">
+          <div data-aos="fade-up" className="">
             <p className="bg-[rgba(45,169,115,.08)] inline-block rounded-full py-1 pr-3 mb-5">
               <span className="bg-[#2da973] text-white rounded-full py-1 px-3">Online!</span> Global
               learning platform
@@ -53,7 +53,7 @@ const Banner = () => {
               </p>
             </div>
           </div>
-          <div className="overflow-hidden">
+          <div data-aos="zoom-in" className="overflow-hidden">
             <img src={bannerImg} alt="" className="w-full h-[500px] object-contain" />
           </div>
         </Container>

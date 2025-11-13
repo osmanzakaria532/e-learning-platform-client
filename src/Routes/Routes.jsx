@@ -30,10 +30,6 @@ const router = createBrowserRouter([
       },
       {
         path: `/course-details/:courseId`,
-        // loader: ({ params }) =>
-        //   fetch(`http://localhost:5000/course-details/${params.courseId}`).then((res) =>
-        //     res.json(),
-        //   ),
         element: <CourseDetails />,
       },
       {
