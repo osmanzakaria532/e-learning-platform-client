@@ -9,8 +9,7 @@ import Container from './shered_ui/Container';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
-
-  console.log(user);
+  // console.log(user);
 
   const links = (
     <>
@@ -104,7 +103,7 @@ const Navbar = () => {
                     <img src={userImg} alt="" />
                   </div>
                 </Link>
-                <div className="absolute -bottom-10 right-0 z-50 hidden group-hover:block">
+                <div className="absolute -bottom-10 left-0 z-50 hidden group-hover:block">
                   <button onClick={handleSignOut} className=" btn flex items-center">
                     Sign out <FaArrowRightToBracket />
                   </button>
