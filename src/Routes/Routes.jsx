@@ -1,16 +1,19 @@
 import { createBrowserRouter } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 
+import CourseDetails from '../components/CourseDetails';
+import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import Achievements from '../Pages/Achievements';
 import AllCourses from '../Pages/AllCourses';
 import Blogs from '../Pages/Blogs';
 import Community from '../Pages/Community';
 import Contact from '../Pages/Contact';
+import Dashboard from '../Pages/Dashboard';
 import Home from '../Pages/Home';
 import SignIn from '../Pages/SignIn';
 import SignUp from '../Pages/SignUp';
+import PrivateRouter from '../Provider/PrivateRouter';
 import RootLayout from '../RootLayout/RootLayout';
-import CourseDetails from '../components/CourseDetails';
 
 const router = createBrowserRouter([
   {
@@ -30,11 +33,19 @@ const router = createBrowserRouter([
       },
       {
         path: `/course-details/:courseId`,
-        element: <CourseDetails />,
+        element: (
+          <PrivateRouter>
+            <CourseDetails />
+          </PrivateRouter>
+        ),
       },
       {
         path: '/achievements',
-        element: <Achievements />,
+        element: (
+          <PrivateRouter>
+            <Achievements />
+          </PrivateRouter>
+        ),
       },
       {
         path: '/community',
@@ -55,6 +66,16 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
       },
     ],
   },

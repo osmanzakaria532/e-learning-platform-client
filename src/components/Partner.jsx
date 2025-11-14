@@ -8,7 +8,7 @@ const Partner = () => {
   return (
     <section className="bg-white text-gray-900 py-10">
       <div className="min-h-[70vh] w-full grid md:grid-cols-2 overflow-hidden shadow-sm">
-        <div className="relative px-8 py-14 md:py-20 flex items-center">
+        <div className="relative px-8 py-14 md:py-20 flex items-center" data-aos="slide-right">
           <div className="absolute inset-0 bg-linear-to-br from-rose-500 via-rose-500 to-rose-600" />
           <svg
             className="absolute inset-0 h-full w-full opacity-25 mix-blend-overlay"
@@ -66,7 +66,7 @@ const Partner = () => {
         </div>
 
         {/* RIGHT: Image panel */}
-        <div className="relative min-h-[40vh] md:min-h-[70vh]">
+        <div className="relative min-h-[40vh] md:min-h-[70vh]" data-aos="slide-left">
           <img
             src={instructor}
             alt="Person typing on a laptop"

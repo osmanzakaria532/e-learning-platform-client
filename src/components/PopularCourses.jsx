@@ -23,11 +23,11 @@ const PopularCourses = () => {
   return (
     <div>
       <Container>
-        <h2 className="text-2xl font-bold">Popular Courses {course.length}</h2>
+        <h2 className="text-2xl font-bold mb-5">Popular Courses {course.length}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {course.map((item) => (
-            <div key={item._id} className="p-4 border rounded-lg shadow">
+            <div key={item._id} className="p-4 border rounded-lg shadow" data-aos="fade">
               <div className="overflow-hidden rounded-t-md border border-b-0 relative">
                 <div className="absolute top-3 z-40 w-full flex justify-between px-3.5 text-xs">
                   <p className="bg-[#2da973] text-white py-1 px-2 rounded-full">{item.category}</p>
