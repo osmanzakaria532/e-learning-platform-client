@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { FaFacebook, FaLinkedin, FaTwitterSquare } from 'react-icons/fa';
-import { Link } from 'react-router';
-import Container from './shared_ui/Container';
+import Container from '../components/shared_ui/Container';
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/top-instructors')
+    fetch('http://localhost:5000/instructors')
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -15,17 +14,10 @@ const Instructors = () => {
       });
   }, []);
   return (
-    <div className="py-20">
+    <div className="py-10">
       <Container>
-        <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold ">Top Instructors</h2>
-          <div>
-            <Link to="/instructors" className="btn border border-[#2da973] ">
-              See more
-            </Link>
-          </div>
-        </div>
-        <div className="mt-10 grid lg:grid-cols-4 gap-6">
+        <h2 className="text-2xl font-bold ">Instructors</h2>
+        <div className="mt-5 grid lg:grid-cols-4 gap-6">
           {instructors.map((instructor) => (
             <div key={instructor._id} className="border rounded-t-lg ">
               <div className="overflow-hidden">

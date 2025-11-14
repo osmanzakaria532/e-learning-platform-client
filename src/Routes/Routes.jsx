@@ -10,6 +10,8 @@ import Community from '../Pages/Community';
 import Contact from '../Pages/Contact';
 import Dashboard from '../Pages/Dashboard';
 import Home from '../Pages/Home';
+import Instructors from '../Pages/Instructors';
+import MyAccount from '../Pages/MyAccount';
 import SignIn from '../Pages/SignIn';
 import SignUp from '../Pages/SignUp';
 import PrivateRouter from '../Provider/PrivateRouter';
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
             <CourseDetails />
           </PrivateRouter>
         ),
+      },
+      {
+        path: '/instructors',
+        element: <Instructors />,
       },
       {
         path: '/achievements',
@@ -78,6 +84,10 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
     ],
+  },
+  {
+    path: '/my-account',
+    element: <MyAccount />,
   },
 ]);
 

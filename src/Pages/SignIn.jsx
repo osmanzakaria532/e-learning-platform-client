@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../ContextApi/AuthContext';
@@ -6,7 +7,7 @@ import { AuthContext } from '../ContextApi/AuthContext';
 const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -24,7 +25,44 @@ const SignIn = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err.code);
+        toast.error((err.code = 'Must Register before Login'));
+      });
+  };
+
+  const handleSignInWithGoogle = () => {
+    console.log('SignIn With Google');
+    signInWithGoogle()
+      .then((result) => {
+        toast.success(`Sign In Successfully`);
+        console.log(result.user);
+
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        };
+
+        // console.log(newUser);
+
+        // create user in database
+        fetch('http://localhost:5000/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('data after user save', data);
+          });
+
+        // 👉 success হলে redirect
+        navigate(location.state ? location.state : '/');
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.code || 'Google sign in failed');
       });
   };
   return (
@@ -49,7 +87,20 @@ const SignIn = () => {
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>
-                  <button className="btn btn-neutral mt-4">Login</button>
+                  <div className="flex items-center gap-6 mt-4">
+                    <div className="flex-1">
+                      <button className="btn btn-neutral w-full">Login</button>
+                    </div>
+                    <div>
+                      <button
+                        type="button"
+                        onClick={handleSignInWithGoogle}
+                        className="btn border border-[#2da973]"
+                      >
+                        <FaGoogle className="text-lg" />
+                      </button>
+                    </div>
+                  </div>
                   <div className="text-center group mt-5">
                     <Link to="/signup" className="">
                       Don't have an account ? <span className="group-hover:underline">Sign Up</span>

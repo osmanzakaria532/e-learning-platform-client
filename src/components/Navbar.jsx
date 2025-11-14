@@ -100,7 +100,7 @@ const Navbar = () => {
                 <Link to="/dashboard">Dashboard</Link>
                 <Link to="/my-account">
                   <div className="w-8 h-8">
-                    <img src={userImg} alt="" />
+                    <img src={user?.photoUrl ? user.photoUR : userImg} alt="" />
                   </div>
                 </Link>
                 <div className="absolute -bottom-10 left-0 z-50 hidden group-hover:block">

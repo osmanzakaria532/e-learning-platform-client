@@ -11,7 +11,7 @@ const PopularCourses = () => {
     fetch('http://localhost:5000/popular-courses')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setCourse(data);
       });
   }, []);
