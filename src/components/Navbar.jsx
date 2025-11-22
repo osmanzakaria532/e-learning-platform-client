@@ -23,6 +23,13 @@ const Navbar = () => {
           All Courses
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink to="/add-course" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
+            Add Course
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="/achievements" className={({ isActive }) => (isActive ? 'bg-[#d4d4d4]' : '')}>
           Achievements

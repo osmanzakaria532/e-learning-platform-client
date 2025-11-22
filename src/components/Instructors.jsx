@@ -7,7 +7,7 @@ const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/top-instructors')
+    fetch('https://e-learning-platform-server-osmanzakaria.vercel.app/top-instructors')
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

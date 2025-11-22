@@ -1,10 +1,12 @@
-import { useContext } from 'react';
-import { FaGoogle } from 'react-icons/fa';
+import { useContext, useState } from 'react';
+import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../ContextApi/AuthContext';
 
 const SignIn = () => {
+  const [passwordError, setPasswordError] = useState('');
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
@@ -14,8 +16,21 @@ const SignIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+    // console.log({ form, email, password });
 
-    console.log({ form, email, password });
+    setPasswordError('');
+    if (!/[A-Z]/.test(password)) {
+      setPasswordError('Password must contain at least one Uppercase letter.');
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      setPasswordError('Password must contain at least one Lowercase letter.');
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters long.');
+      return;
+    }
 
     signInUser(email, password)
       .then((res) => {
@@ -45,7 +60,7 @@ const SignIn = () => {
         // console.log(newUser);
 
         // create user in database
-        fetch('http://localhost:5000/users', {
+        fetch('https://e-learning-platform-server-osmanzakaria.vercel.app/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -83,7 +98,21 @@ const SignIn = () => {
                   <label className="label">Email</label>
                   <input type="email" className="input" placeholder="Email" name="email" />
                   <label className="label">Password</label>
-                  <input type="password" className="input" placeholder="Password" name="password" />
+                  <div className="relative">
+                    <input
+                      type={show === false ? 'password' : 'text'}
+                      className="input"
+                      placeholder="Password"
+                      name="password"
+                    />
+                    <div
+                      onClick={() => setShow(!show)}
+                      className="absolute right-7 top-1/2 transform -translate-y-1/2 z-50"
+                    >
+                      {show ? <FaEye className="cursor-pointer" /> : <FaEyeSlash />}
+                    </div>
+                  </div>
+                  <p className="text-red-400 my-2">{passwordError}</p>
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>

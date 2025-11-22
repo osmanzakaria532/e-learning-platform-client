@@ -8,7 +8,7 @@ const PopularCourses = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/popular-courses')
+    fetch('https://e-learning-platform-server-osmanzakaria.vercel.app/popular-courses')
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

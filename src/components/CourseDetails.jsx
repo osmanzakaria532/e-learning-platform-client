@@ -1,19 +1,25 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import Container from './shared_ui/Container';
 
 const CourseDetails = () => {
+  const navigate = useNavigate();
   //   const courseDetails = useLoaderData();
-  const [course, setCourse] = useState();
+  const [course, setCourse] = useState(null);
   const { courseId } = useParams();
 
-  console.log(courseId);
+  // console.log(courseId);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/course-details/${courseId}`)
+    fetch(`https://e-learning-platform-server-osmanzakaria.vercel.app/course-details/${courseId}`)
       .then((res) => res.json())
       .then((data) => setCourse(data));
   }, [courseId]);
+
+  const handleUpdateCourse = (courseId) => {
+    console.log('uddate course', courseId);
+    navigate(`/update-course/${courseId}`);
+  };
 
   if (!course) {
     return (
@@ -26,17 +32,19 @@ const CourseDetails = () => {
   return (
     <div className="py-10 bg-[#E5E5E5]">
       <Container>
-        <p className="text-2xl font-semibold mb-5">{`Course Id ${course._id}`}</p>
+        {/* <p className="text-2xl font-semibold mb-5">{`Course Id ${course._id}`}</p> */}
         <div className="flex gap-6 bg-[#EFEBF5] rounded-lg py-10 px-8">
           <div>
             <div className="">
-              <img src={course.thumbnail_url} alt="" className="h-[450px] " />
+              <img src={course?.thumbnail_url} alt="" className="h-[450px] " />
             </div>
             <h2 className="mt-6 text-xl font-bold">
               <span>Course Name</span> : {course.title}
             </h2>
           </div>
-          <div className="">s</div>
+          <div className="">
+            <p>course instructor info</p>
+          </div>
         </div>
 
         <div className="mt-10">
@@ -73,11 +81,11 @@ const CourseDetails = () => {
                 <div className="space-y-1">
                   <p className="flex justify-between">
                     <span className="text-[#5D5A6F] font-semibold">Price</span>{' '}
-                    <span className="text-red-700">${course.price}</span>
+                    <span className="text-red-700">${course ? course?.price : '100'}</span>
                   </p>
                   <p className="flex justify-between">
                     <span className="text-[#5D5A6F] font-semibold">Ratings</span>{' '}
-                    <span className="">{course.rating}</span>
+                    <span className="">{course ? course?.rating : '00'}</span>
                   </p>
                   <p className="flex justify-between">
                     <span className="text-[#5D5A6F] font-semibold">Review</span>{' '}
@@ -114,6 +122,11 @@ const CourseDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-10">
+          <button onClick={() => handleUpdateCourse(course._id)} className="btn w-full">
+            Update Course
+          </button>
         </div>
       </Container>
     </div>

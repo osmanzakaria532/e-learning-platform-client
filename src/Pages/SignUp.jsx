@@ -51,7 +51,7 @@ const SignUp = () => {
               : { displayName: name, photoURL: photoUrl, email },
           );
 
-          return fetch('http://localhost:5000/users', {
+          return fetch('https://e-learning-platform-server-osmanzakaria.vercel.app/users', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const SignUp = () => {
         setUser(result.user);
 
         // create user in database
-        fetch('http://localhost:5000/users', {
+        fetch('https://e-learning-platform-server-osmanzakaria.vercel.app/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -100,7 +100,6 @@ const SignUp = () => {
             console.log('data after user save', data);
           });
 
-        // 👉 success হলে redirect
         navigate(location.state ? location.state : '/');
       })
       .catch((err) => {

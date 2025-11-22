@@ -4,6 +4,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import CourseDetails from '../components/CourseDetails';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import Achievements from '../Pages/Achievements';
+import AddCourse from '../Pages/AddCourse';
 import AllCourses from '../Pages/AllCourses';
 import Blogs from '../Pages/Blogs';
 import Community from '../Pages/Community';
@@ -14,6 +15,7 @@ import Instructors from '../Pages/Instructors';
 import MyAccount from '../Pages/MyAccount';
 import SignIn from '../Pages/SignIn';
 import SignUp from '../Pages/SignUp';
+import UpdateCourse from '../Pages/UpdateCourse';
 import PrivateRouter from '../Provider/PrivateRouter';
 import RootLayout from '../RootLayout/RootLayout';
 
@@ -29,7 +31,8 @@ const router = createBrowserRouter([
 
       {
         path: '/all-courses',
-        loader: () => fetch('http://localhost:5000/all-courses'),
+        loader: () =>
+          fetch('https://e-learning-platform-server-osmanzakaria.vercel.app/all-courses'),
         element: <AllCourses />,
         hydrateFallbackElement: <LoadingSpinner />,
       },
@@ -38,6 +41,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <CourseDetails />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: '/add-course',
+        element: (
+          <PrivateRouter>
+            <AddCourse />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: '/update-course/:updateId',
+        element: (
+          <PrivateRouter>
+            <UpdateCourse />
           </PrivateRouter>
         ),
       },
